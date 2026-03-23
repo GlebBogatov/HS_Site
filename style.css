@@ -187,6 +187,7 @@ section { padding: 88px 0; }
 .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--red); color: #fff; }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s ease; padding: 0 24px; color: var(--text-mid); font-size: .93rem; line-height: 1.75; }
 .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+.faq-a a { color: var(--red); text-decoration: underline; }
 
 /* ===== PARTNERS ===== */
 #partners { background: #fff; padding: 52px 0; }
