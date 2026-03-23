@@ -92,7 +92,7 @@ section { padding: 88px 0; }
 .nav-menu a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transition: transform var(--tr); }
 .nav-menu a:hover { color: #fff; }
 .nav-menu a:hover::after { transform: scaleX(1); }
-.nav-actions { display: flex; align-items: flex-end; gap: 16px; }
+.nav-actions { display: flex; align-items: center; gap: 16px; }
 .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
 .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all .3s; }
 
