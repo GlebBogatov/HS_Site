@@ -26,8 +26,10 @@
       <li><a href="#portfolio">Работы</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Контакты</a></li>
+      <li><a href="#" onclick="openModal('modal-prices', event); document.getElementById('nav-menu').classList.remove('open')">Наши цены</a></li>
     </ul>
     <div class="nav-actions" id="nav-actions">
+      <button class="btn btn-outline btn-sm" onclick="openModal('modal-prices', event)">Наши цены</button>
       <a href="https://t.me/heatservice_samara" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
         <svg class="icon-tg" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.88 13.566l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.268.993z"/></svg>
         Написать
@@ -548,6 +550,57 @@
     </ul>
     <p><strong>Управление</strong></p>
     <p>Вы можете отключить Cookie в настройках браузера. Настройки Cookie хранятся 365 дней.</p>
+  </div>
+</div>
+
+<!-- ===== MODAL: НАШИ ЦЕНЫ ===== -->
+<div class="modal-overlay" id="modal-prices" onclick="closeModalOutside(event,'modal-prices')">
+  <div class="modal modal-prices">
+    <button class="modal-close" onclick="closeModal('modal-prices')">✕</button>
+    <h3>Прайс-лист <span class="prices-date">· 23 марта 2026 г.</span></h3>
+    <table class="prices-table">
+      <thead>
+        <tr>
+          <th>Услуга</th>
+          <th>Стоимость</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ежегодное ТО котла</td>
+          <td>от 4 500 руб.</td>
+        </tr>
+        <tr>
+          <td>Диагностика котельного оборудования</td>
+          <td>от 2 500 руб.</td>
+        </tr>
+        <tr>
+          <td>Чистка теплообменника</td>
+          <td>от 3 500 руб.</td>
+        </tr>
+        <tr>
+          <td>Замена горелки / форсунки</td>
+          <td>от 7 500 руб.</td>
+        </tr>
+        <tr>
+          <td>Настройка и программирование автоматики</td>
+          <td>от 5 000 руб.</td>
+        </tr>
+        <tr>
+          <td>Обслуживание системы водоподготовки</td>
+          <td>от 6 000 руб./год</td>
+        </tr>
+        <tr>
+          <td>Аварийный выезд</td>
+          <td>от 3 000 руб.</td>
+        </tr>
+        <tr>
+          <td>Монтаж котельной под ключ</td>
+          <td>по договору</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="prices-disclaimer">Обслуживание в ООО «ХитСервис» является дополнением к официальному обслуживанию и не заменяет его.</p>
   </div>
 </div>
 

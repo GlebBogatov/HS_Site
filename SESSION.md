@@ -9,6 +9,8 @@
 2. [--:--] "посмотри что за проект" → выполнено
 3. [--:--] "это не очень хороший проект. сделай новый красивый и функциональный сайт. Ограничения — одностраничный, стили из гайдлайна" → выполнено
 4. [--:--] "сохрани результаты сессии" → выполнено
+5. [--:--] "опубликуй на хостинге" → выполнено (GitHub Pages)
+6. [--:--] "обнови результаты сессии" → выполнено
 
 ## ✅ Что сделано в этой сессии
 - [x] Анализ старого сайта (монолит 1419 строк, HTML+CSS+JS в одном файле)
@@ -17,6 +19,8 @@
 - [x] Попытка чтения Гайдлайн.pdf — не удалась (нет pdftoppm на Windows)
 - [x] Полная перестройка сайта: разделение на 3 файла (index.html / style.css / main.js)
 - [x] Реализованы секции: Navbar, Hero, Services, Process, Stats, About, Portfolio, FAQ, Partners, Contact, Pre-footer CTA, Footer, Modals, Cookie banner, Floating TG button
+- [x] Git-репозиторий инициализирован, код запушен на GitHub
+- [x] GitHub Pages включён — сайт опубликован на https://glebbogatov.github.io/HS_Site/
 
 ## 📁 Текущие файлы и статус
 | Файл | Статус | Примечание |
@@ -31,6 +35,7 @@
 | logo_oven_2022.png | ✅ используется | раздел partners |
 | footer-logo-new.png | ✅ используется | раздел partners (ZONT) |
 | Гайдлайн.pdf | ⚠️ не прочитан | нет инструмента pdftoppm на Windows |
+| .git/ | ✅ инициализирован | remote: github.com/GlebBogatov/HS_Site |
 
 ## 🤔 Принятые решения
 - Vanilla HTML/CSS/JS — без фреймворков (лендинг не требует сложности)
@@ -40,6 +45,7 @@
 - Floating TG кнопка: синий круг (#2aa3dc), появляется при скролле > 400px
 - Cookie banner: localStorage ключ `cookie_consent`
 - Форма: имитация отправки (setTimeout 600ms), заглушка — нужен бэкенд
+- GitHub Pages: ветка `main`, корень `/`, URL https://glebbogatov.github.io/HS_Site/
 
 ## 🐛 Найденные ошибки в сессии
 - chat_heatservice_full.txt — ошибка кодировки (Windows-1251 / UTF-8 mix), частично прочитан
