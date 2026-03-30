@@ -94,23 +94,49 @@ function toggleFaq(btn) {
 }
 
 /* ===== FORM ===== */
+const TG_TOKEN = '8796465491:AAHf8PNnn66lTfnr5F4FW9NDhtekMglkGtw';
+const TG_CHAT  = '192237987';
+
 function submitForm(e) {
   e.preventDefault();
 
-  const form = document.getElementById('contact-form');
+  const form         = document.getElementById('contact-form');
   const successBlock = document.getElementById('form-success');
+  const name         = form.name.value.trim();
+  const phone        = form.phone.value.trim();
+  const service      = form.service.value;
+  const message      = form.message.value.trim();
+
+  const text = [
+    '🔥 <b>Новая заявка — ХитСервис</b>',
+    '',
+    `👤 <b>Имя:</b> ${name}`,
+    `📞 <b>Телефон:</b> ${phone}`,
+    service ? `🔧 <b>Услуга:</b> ${service}` : null,
+    message ? `💬 <b>Комментарий:</b> ${message}` : null,
+  ].filter(Boolean).join('\n');
 
   form.querySelectorAll('input, select, textarea, button').forEach(el => {
     el.disabled = true;
   });
 
-  // Имитация отправки (заменить на реальный fetch при наличии бэкенда)
-  setTimeout(() => {
-    form.querySelectorAll('.form-row, .form-group, .consent-block, button[type=submit]').forEach(el => {
-      el.style.display = 'none';
+  fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' }),
+  })
+    .then(() => {
+      form.querySelectorAll('.form-row, .form-group, .consent-block, button[type=submit]').forEach(el => {
+        el.style.display = 'none';
+      });
+      successBlock.style.display = 'block';
+    })
+    .catch(() => {
+      form.querySelectorAll('input, select, textarea, button').forEach(el => {
+        el.disabled = false;
+      });
+      alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Telegram.');
     });
-    successBlock.style.display = 'block';
-  }, 600);
 }
 
 /* ===== MODALS ===== */
