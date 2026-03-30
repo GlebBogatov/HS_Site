@@ -17,18 +17,18 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ===== VARIABLES ===== */
 :root {
-  --navy: #1a2e5a;
-  --navy-light: #243d7a;
-  --navy-dark: #111e3c;
-  --red: #d42b2b;
-  --red-dark: #b02020;
+  --navy: #004B9D;
+  --navy-light: #1a62b5;
+  --navy-dark: #003380;
+  --red: #F0141E;
+  --red-dark: #C8000F;
   --white: #fff;
   --gray-light: #f4f6fa;
   --gray: #e0e4ee;
   --text-dark: #1a1a2e;
   --text-mid: #4a5068;
-  --shadow: 0 4px 24px rgba(26,46,90,.10);
-  --shadow-lg: 0 12px 48px rgba(26,46,90,.16);
+  --shadow: 0 4px 24px rgba(0,75,157,.10);
+  --shadow-lg: 0 12px 48px rgba(0,75,157,.16);
   --radius: 10px;
   --tr: .25s ease;
 }
@@ -99,7 +99,8 @@ section { padding: 88px 0; }
 /* ===== HERO ===== */
 #hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; padding-top: 64px; }
 .hero-bg { position: absolute; inset: 0; background: url('industrial-2.png') center/cover no-repeat; opacity: .13; }
-.hero-gradient { position: absolute; inset: 0; background: linear-gradient(108deg, var(--navy-dark) 42%, rgba(26,46,90,.88) 100%); }
+.hero-gradient { position: absolute; inset: 0; background: linear-gradient(108deg, var(--navy-dark) 42%, rgba(0,75,157,.88) 100%); }
+.hero-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.06) 0, rgba(255,255,255,.06) 2px, transparent 2px, transparent 14px); pointer-events: none; }
 .hero-glow { position: absolute; top: -80px; right: -80px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(212,43,43,.14) 0%, transparent 62%); pointer-events: none; }
 .hero-content { position: relative; z-index: 1; max-width: 700px; padding: 80px 0; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 100px; background: rgba(212,43,43,.15); border: 1px solid rgba(212,43,43,.4); color: #ff8080; font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 24px; }
@@ -139,7 +140,7 @@ section { padding: 88px 0; }
 
 /* ===== STATS STRIP ===== */
 #stats { background: var(--red); padding: 64px 0; position: relative; overflow: hidden; }
-#stats::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 2px, transparent 2px, transparent 14px); }
+#stats::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.08) 0, rgba(255,255,255,.08) 2px, transparent 2px, transparent 14px); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; position: relative; }
 .stat-item { position: relative; }
 .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 15%; bottom: 15%; width: 1px; background: rgba(255,255,255,.25); }
@@ -200,7 +201,7 @@ section { padding: 88px 0; }
 
 /* ===== CONTACT ===== */
 #contact { background: var(--navy-dark); position: relative; overflow: hidden; }
-#contact::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 2px, transparent 2px, transparent 14px); }
+#contact::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.07) 0, rgba(255,255,255,.07) 2px, transparent 2px, transparent 14px); }
 .contact-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; position: relative; }
 .contact-info .label { color: rgba(212,43,43,.85); }
 .contact-info h2 { color: #fff; }
@@ -293,7 +294,7 @@ footer { background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,.0
   position: relative;
   overflow: hidden;
 }
-#cta-bottom::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 2px, transparent 2px, transparent 14px); }
+#cta-bottom::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.08) 0, rgba(255,255,255,.08) 2px, transparent 2px, transparent 14px); }
 .cta-bottom-inner { position: relative; }
 #cta-bottom h2 { color: #fff; margin-bottom: 14px; font-size: clamp(2rem, 4vw, 2.8rem); }
 #cta-bottom p { color: rgba(255,255,255,.62); font-size: 1.08rem; max-width: 500px; margin: 0 auto 36px; }
