@@ -94,8 +94,9 @@ function toggleFaq(btn) {
 }
 
 /* ===== FORM ===== */
-const TG_TOKEN = '8796465491:AAHf8PNnn66lTfnr5F4FW9NDhtekMglkGtw';
-const TG_CHAT  = '192237987';
+const TG_TOKEN    = '8796465491:AAHf8PNnn66lTfnr5F4FW9NDhtekMglkGtw';
+const TG_CHAT     = '192237987';
+const BOT_WEBHOOK = 'https://bot.heatservice.tech/webhook/lead';
 
 function submitForm(e) {
   e.preventDefault();
@@ -120,11 +121,19 @@ function submitForm(e) {
     el.disabled = true;
   });
 
-  fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+  const tgFetch = fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' }),
-  })
+  });
+
+  const botFetch = fetch(BOT_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, phone, service, message }),
+  }).catch(() => {}); // ошибка бота не блокирует отправку в Telegram
+
+  Promise.all([tgFetch, botFetch])
     .then(() => {
       form.querySelectorAll('.form-row, .form-group, .consent-block, button[type=submit]').forEach(el => {
         el.style.display = 'none';
