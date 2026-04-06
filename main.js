@@ -103,10 +103,10 @@ function submitForm(e) {
 
   const form         = document.getElementById('contact-form');
   const successBlock = document.getElementById('form-success');
-  const name         = form.name.value.trim();
-  const phone        = form.phone.value.trim();
-  const service      = form.service.value;
-  const message      = form.message.value.trim();
+  const name         = form.elements['name'].value.trim();
+  const phone        = form.elements['phone'].value.trim();
+  const service      = form.elements['service'].value;
+  const message      = form.elements['message'].value.trim();
 
   const text = [
     '🔥 <b>Новая заявка — ХитСервис</b>',
