@@ -94,8 +94,6 @@ function toggleFaq(btn) {
 }
 
 /* ===== FORM ===== */
-const TG_TOKEN    = '8796465491:AAHf8PNnn66lTfnr5F4FW9NDhtekMglkGtw';
-const TG_CHAT     = '192237987';
 const BOT_WEBHOOK = 'https://bot.heatservice.tech/webhook/lead';
 
 function submitForm(e) {
@@ -108,34 +106,18 @@ function submitForm(e) {
   const service      = form.elements['service'].value;
   const message      = form.elements['message'].value.trim();
 
-  const text = [
-    '🔥 <b>Новая заявка — ХитСервис</b>',
-    '',
-    `👤 <b>Имя:</b> ${name}`,
-    `📞 <b>Телефон:</b> ${phone}`,
-    service ? `🔧 <b>Услуга:</b> ${service}` : null,
-    message ? `💬 <b>Комментарий:</b> ${message}` : null,
-  ].filter(Boolean).join('\n');
-
   const submitBtn = form.querySelector('button[type=submit]');
   submitBtn.disabled = true;
   submitBtn.textContent = '⏳ Отправляем заявку, подождите...';
   form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = true; });
 
-  const tgFetch = fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' }),
-  });
-
-  const botFetch = fetch(BOT_WEBHOOK, {
+  fetch(BOT_WEBHOOK, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, phone, service, message }),
-  }).catch(() => {}); // ошибка бота не блокирует отправку в Telegram
-
-  Promise.all([tgFetch, botFetch])
-    .then(() => {
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('server error');
       form.querySelectorAll('.form-row, .form-group, .consent-block, button[type=submit]').forEach(el => {
         el.style.display = 'none';
       });
