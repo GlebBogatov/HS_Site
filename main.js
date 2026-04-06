@@ -117,9 +117,10 @@ function submitForm(e) {
     message ? `💬 <b>Комментарий:</b> ${message}` : null,
   ].filter(Boolean).join('\n');
 
-  form.querySelectorAll('input, select, textarea, button').forEach(el => {
-    el.disabled = true;
-  });
+  const submitBtn = form.querySelector('button[type=submit]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ Отправляем заявку, подождите...';
+  form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = true; });
 
   const tgFetch = fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST',
@@ -141,9 +142,9 @@ function submitForm(e) {
       successBlock.style.display = 'block';
     })
     .catch(() => {
-      form.querySelectorAll('input, select, textarea, button').forEach(el => {
-        el.disabled = false;
-      });
+      form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = false; });
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку →';
       alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Telegram.');
     });
 }
