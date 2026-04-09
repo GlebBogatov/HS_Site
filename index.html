@@ -478,49 +478,7 @@
       </div>
 
       <div class="contact-form-wrap fade-in delay-1">
-        <h3>Оставить заявку</h3>
-        <p class="form-sub">Заполните форму — перезвоним в рабочее время</p>
-        <form id="contact-form" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Ваше имя *</label>
-              <input type="text" id="name" name="name" placeholder="Иван Иванов" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">Телефон *</label>
-              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="service">Услуга</label>
-            <select id="service" name="service">
-              <option value="">— Выберите услугу —</option>
-              <option>Монтаж котельной</option>
-              <option>Сервисное обслуживание</option>
-              <option>Система автоматизации</option>
-              <option>Водоподготовка</option>
-              <option>Другое / консультация</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Описание объекта</label>
-            <textarea id="message" name="message" placeholder="Опишите кратко объект и задачу..."></textarea>
-          </div>
-          <div class="consent-block">
-            <input type="checkbox" id="consent" name="consent" required />
-            <label for="consent">Я согласен(а) на <a href="#" onclick="openModal('modal-policy', event)">обработку персональных данных</a> в соответствии с ФЗ-152</label>
-          </div>
-          <button type="submit" class="btn btn-navy" style="width:100%">Отправить заявку →</button>
-          <div class="form-success" id="form-success">
-            <div class="ok-icon">✅</div>
-            <h4>Заявка принята!</h4>
-            <p>Чтобы получить точное коммерческое предложение — нажмите кнопку ниже и напишите боту <strong>/start</strong></p>
-            <p style="color:var(--text-mid);font-size:14px;margin-top:8px;">Бот задаст несколько уточняющих вопросов и подготовит КП в течение 2 минут</p>
-            <a href="https://t.me/heatservice_leads_bot" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:16px;display:inline-block">
-              Открыть бота в Telegram →
-            </a>
-          </div>
-        </form>
+        <div id="quiz"></div>
       </div>
     </div>
   </div>
