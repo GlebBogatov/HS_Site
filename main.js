@@ -76,14 +76,11 @@ function initFadeIn() {
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   // Счётчики в hero запускаем сразу
+  // (счётчики в stats-strip анимируются через собственные .fade-in блоки)
   const heroStats = document.querySelector('.hero-stats');
   if (heroStats) {
     setTimeout(() => animateCounters(heroStats), 400);
   }
-
-  // Счётчики в stats-strip
-  const statsSection = document.getElementById('stats');
-  if (statsSection) observer.observe(statsSection);
 }
 
 /* ===== FAQ ACCORDION ===== */
@@ -99,7 +96,9 @@ function toggleFaq(btn) {
 }
 
 /* ===== QUIZ ===== */
-const BOT_WEBHOOK = 'https://bot.heatservice.tech/webhook/lead';
+// Относительный путь: nginx проксирует /api/lead -> бот (127.0.0.1:8000/webhook/lead),
+// кросс-доменных запросов и CORS нет
+const BOT_WEBHOOK = '/api/lead';
 
 const SERVICES = [
   { id: 'Монтаж котельной',      icon: '🔥' },
@@ -180,8 +179,9 @@ function renderQuestionHTML(idx) {
 
   let body = '';
   if (q.type === 'text') {
+    const safe = (cur || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
     body = `<input class="quiz-text-input" type="text" placeholder="${q.placeholder || ''}"
-      value="${cur || ''}" oninput="qAnswers[${idx}]=this.value" />`;
+      value="${safe}" oninput="qAnswers[${idx}]=this.value" />`;
   } else {
     body = '<div class="quiz-options">' + q.opts.map(opt => {
       const sel = q.type === 'checkbox'
@@ -277,6 +277,8 @@ async function submitQuiz() {
   const phone   = document.getElementById('q-phone').value.trim();
   const consent = document.getElementById('q-consent').checked;
   if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон.'); return; }
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length < 10 || digits.length > 12) { alert('Пожалуйста, укажите корректный номер телефона.'); return; }
   if (!consent) { alert('Необходимо согласие на обработку персональных данных.'); return; }
 
   const btn = document.getElementById('q-submit');
