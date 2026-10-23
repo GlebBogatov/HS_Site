@@ -109,6 +109,8 @@ section { padding: 88px 0; }
 #hero h1 em { color: var(--red); font-style: normal; }
 .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.7); max-width: 520px; line-height: 1.7; margin-bottom: 36px; }
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 60px; }
+.hero-phone { display: inline-flex; align-items: center; color: #fff; font-weight: 700; white-space: nowrap; padding: 0 8px; text-decoration: underline; text-underline-offset: 4px; }
+.hero-phone:hover { color: #ff8080; }
 .icon-tg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
 .hero-stats { display: flex; gap: 48px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.12); flex-wrap: wrap; }
 .h-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.4rem; color: #fff; line-height: 1; }
@@ -341,6 +343,16 @@ footer { background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,.0
 #float-tg.show { opacity: 1; pointer-events: all; transform: scale(1); }
 #float-tg:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(42,163,220,.45); }
 #float-tg svg { width: 26px; height: 26px; fill: #fff; }
+#float-phone {
+  position: fixed; bottom: 36px; right: 92px; z-index: 8000;
+  padding: 8px 14px; border-radius: 24px;
+  color: #fff; background: var(--navy-dark); font-weight: 700;
+  white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,.22);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--tr), visibility var(--tr);
+}
+#float-tg.show + #float-phone { opacity: 1; visibility: visible; pointer-events: auto; }
+#float-phone:hover { background: var(--navy); }
 
 /* ===== ANIMATIONS ===== */
 .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
