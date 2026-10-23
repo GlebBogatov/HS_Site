@@ -7,6 +7,13 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../main.js', import.meta.url), 'utf8');
 
+test('desktop navigation switches to a menu before labels wrap or overlap the logo', () => {
+  assert.match(css, /\.nav-logo\s*\{[^}]*flex-shrink:\s*0;[^}]*white-space:\s*nowrap/);
+  assert.match(css, /\.nav-menu a\s*\{[^}]*white-space:\s*nowrap/);
+  assert.match(css, /@media\s*\(max-width:\s*1399px\)\s*\{\s*\.nav-menu\s*\{\s*display:\s*none/);
+  assert.match(css, /\.nav-menu\.open\s*\{[^}]*top:\s*100%/);
+});
+
 test('header phone is a call button between prices and Telegram', () => {
   const actions = html.match(/<div class="nav-actions"[^>]*>([\s\S]*?)<\/div>/)?.[1];
   assert.ok(actions);
