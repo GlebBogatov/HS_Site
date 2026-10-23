@@ -170,6 +170,12 @@ function renderServiceHTML() {
   </div>`;
 }
 
+function renderEmergencyCallHTML() {
+  return qService === 'Сервисное обслуживание' && qAnswers[0] === 'Котёл не работает / авария'
+    ? '<div class="quiz-emergency">Срочная ситуация? <a href="tel:+78462677445">Позвонить сейчас: (846) 267-74-45</a></div>'
+    : '';
+}
+
 function renderQuestionHTML(idx) {
   const questions = QUIZ_Q[qService];
   const q   = questions[idx];
@@ -198,6 +204,7 @@ function renderQuestionHTML(idx) {
     <div class="quiz-progress"><div class="quiz-progress-bar" style="width:${pct}%"></div></div>
     <p class="quiz-step-label">Шаг ${idx + 1} из ${total} · ${qService}</p>
     <h4 class="quiz-question">${q.q}</h4>
+    ${renderEmergencyCallHTML()}
     ${body}
     <div class="quiz-nav${showNext ? '' : ' quiz-nav--back'}">
       <button class="btn btn-ghost" onclick="goBack()">← Назад</button>
@@ -211,13 +218,14 @@ function renderContactHTML() {
     <div class="quiz-progress"><div class="quiz-progress-bar" style="width:95%"></div></div>
     <p class="quiz-step-label">Последний шаг · Контакты</p>
     <h4 class="quiz-question">Оставьте контакты — перезвоним в рабочее время</h4>
+    ${renderEmergencyCallHTML()}
     <div class="form-group">
-      <label>Ваше имя *</label>
-      <input type="text" id="q-name" placeholder="Иван Иванов" />
+      <label for="q-name">Ваше имя *</label>
+      <input type="text" id="q-name" name="name" autocomplete="name" placeholder="Иван Иванов" />
     </div>
     <div class="form-group">
-      <label>Телефон *</label>
-      <input type="tel" id="q-phone" placeholder="+7 (___) ___-__-__" />
+      <label for="q-phone">Телефон *</label>
+      <input type="tel" id="q-phone" name="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" />
     </div>
     <div class="consent-block">
       <input type="checkbox" id="q-consent" />
@@ -346,7 +354,12 @@ document.addEventListener('keydown', e => {
 
 /* ===== COOKIE BANNER ===== */
 function initCookie() {
-  if (localStorage.getItem('cookie_consent')) return;
+  const choice = localStorage.getItem('cookie_consent');
+  const savedAt = Number(localStorage.getItem('cookie_consent_at'));
+  const oneYear = 365 * 24 * 60 * 60 * 1000;
+  if (choice && savedAt > 0 && Date.now() >= savedAt && Date.now() - savedAt < oneYear) return;
+  localStorage.removeItem('cookie_consent');
+  localStorage.removeItem('cookie_consent_at');
   setTimeout(() => {
     const banner = document.getElementById('cookie-banner');
     if (banner) banner.classList.add('show');
@@ -355,6 +368,7 @@ function initCookie() {
 
 function acceptCookie(type) {
   localStorage.setItem('cookie_consent', type);
+  localStorage.setItem('cookie_consent_at', Date.now());
   const banner = document.getElementById('cookie-banner');
   if (banner) banner.classList.remove('show');
 }
@@ -376,10 +390,13 @@ function initSmoothScroll() {
 /* ===== FLOATING TG BUTTON ===== */
 function initFloatBtn() {
   const btn = document.getElementById('float-tg');
+  const cta = document.getElementById('cta-bottom');
   if (!btn) return;
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('show', window.scrollY > 400);
-  }, { passive: true });
+  const update = () => btn.classList.toggle('show',
+    window.scrollY > 400 && (!cta || cta.getBoundingClientRect().top > window.innerHeight));
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 }
 
 /* ===== INIT ===== */
